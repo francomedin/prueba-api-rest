@@ -1,10 +1,10 @@
-from django.core.exceptions import ImproperlyConfigured
+
 import json
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-from unipath import Path
-BASE_DIR = Path(__file__).ancestor(3)
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -14,12 +14,13 @@ BASE_DIR = Path(__file__).ancestor(3)
 with open("secret.json") as f:
     secret = json.loads(f.read())
 
+
 def get_secret(secret_name, secrets=secret):
     try:
         return secrets[secret_name]
-    except:
+    except Exception as e:
         msg = "la variable %s no existe" % secret_name
-        raise ImproperlyConfigured(msg)
+        
 
 
 
@@ -43,6 +44,7 @@ LOCAL_APPS = (
 )
 
 THIRD_PARTY_APPS = (
+    'rest_framework',
 )
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -62,7 +64,7 @@ ROOT_URLCONF = 'agenda.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR.child('templates')],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,0 +1,80 @@
+from django.urls import path, re_path
+from . import views
+
+app_name='persona_app'
+
+urlpatterns=[
+    path(
+        'persons/',
+        views.ListaPersonas.as_view(),
+        name='personas'
+    ),
+    path(
+        'api/person/lista',
+        views.ListaApiViewPersona.as_view(),
+        name='api-personas'
+    ),
+    path(
+        'person/',
+        views.BuscarPersona.as_view(),
+        name='buscar-persona'
+    ),
+    path(
+        'api/person/create',
+        views.PersonCreateView.as_view(),
+        name='create-persona'
+    ),
+     path(
+        'api/person/detail/<pk>/',
+        views.PersonRetrieveAPIView.as_view(),
+        name='detail-persona'
+    ),
+ path(
+        'api/person/delete/<pk>/',
+        views.PersonDeleteView.as_view(),
+        name='delete-persona'
+    ),
+    path(
+        'api/person/update/<pk>/',
+        views.PersonUpdateAPIView.as_view(),
+        name='update-persona'
+    ),
+    path(
+        'api/person/update-retrieve/<pk>/',
+        views.PersonUpdateRetrieveAPIView.as_view(),
+        name='update-persona'
+    ),
+    path(
+        'api/persona2/list/',
+        views.PersonaListAPI2.as_view(),
+        name='list-persona-api'
+    ),
+ path(
+        'api/reunion/list/',
+        views.ReunionAPIView.as_view(),
+        name='list-reunion'
+    ),
+     path(
+        'api/persona3/list/',
+        views.PersonaListAPI3.as_view(),
+        name='list-persona3'
+    ),
+     path(
+        'api/reunionLink/list/',
+        views.ReunionAPIViewLink.as_view(),
+        name='list-reunion'
+    ),
+     path(
+        'api/person-pagination/list/',
+        views.PersonPaginationList.as_view(),
+        name='list-reunion'
+    ),
+     path(
+        'api/reunion/jobs/',
+        views.ReunionByJobs.as_view(),
+        name='list-reunion-jobs'
+    ),
+    
+    
+    
+]
